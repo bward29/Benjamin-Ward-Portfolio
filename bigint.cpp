@@ -49,12 +49,15 @@ void bigint::debugPrint(std::ostream& out) const {
 
 std::ostream& operator<<(std::ostream& out, const bigint& obj) {
     int i = CAPACITY - 1;
+
     while (i > 0 && obj.numArray[i] == 0) --i;
     int count = 0;
-	for (; i >= 0; --i) {
-	out << obj.numArray[i];
-	if (++count % 80 == 0)
-	out << std::endl; //Prints digits in reverse order and inserts a newline for every 80 characters
+
+    for (; i >= 0; --i) {
+	 out << obj.numArray[i];
+
+		if (++count % 80 == 0)
+		   out << std::endl; //Prints digits in reverse order and inserts a newline for every 80 characters
     }
 
     if (count == 0) out << '0';
