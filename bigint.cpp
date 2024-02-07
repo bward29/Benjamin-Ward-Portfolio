@@ -14,7 +14,7 @@ void bigint::initialize() {
     }
 }
 
-bigint::bigint() { //Default consstructor, (calls the 'initialize()' function to set all digits to zero
+bigint::bigint() { //Default consstructor, calls the 'initialize()' function to set all digits to zero
     initialize();
 }
 
