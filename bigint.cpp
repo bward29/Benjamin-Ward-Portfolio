@@ -1,5 +1,5 @@
 /*
-  Benjamin Ward
+* Benjamin Ward
 * bigint.cpp
 * CS23001
 * 02/12/24
