@@ -1,4 +1,4 @@
-/**
+/*
 * Benjamin Ward
 * bigint.hpp
 * CS23001
