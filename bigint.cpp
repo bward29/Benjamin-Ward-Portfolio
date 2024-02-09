@@ -8,18 +8,13 @@
 #include <iostream>
 #include <cassert>
 
-void bigint::initialize() {
+bigint::bigint() {
     for (int i = 0; i < CAPACITY; ++i) {
         numArray[i] = 0; //Initializes numArray to all zeros
     }
 }
 
-bigint::bigint() { //Default consstructor, calls the 'initialize()' function to set all digits to zero
-    initialize();
-}
-
-bigint::bigint(int numbers) { //Converts 'numbers' into a 'bigint'
-    initialize();
+bigint::bigint(int numbers):bigint() { //Converts 'numbers' into a 'bigint'
     int i = 0;
 
     while (numbers > 0) {
@@ -29,8 +24,7 @@ bigint::bigint(int numbers) { //Converts 'numbers' into a 'bigint'
     }
 }
 
-bigint::bigint(const char characters[]) { //Converts each character to an int
-    initialize();
+bigint::bigint(const char characters[]):bigint() { //Converts each character to an int
     int index = 0;
 
     for (; characters[index] != '\0'; ++index);
@@ -64,6 +58,32 @@ std::ostream& operator<<(std::ostream& out, const bigint& obj) {
     return out;
 }
 
+std::istream& operator>>(std::istream& in, bigint& obj) {
+	in >> obj.numArray[0];
+		return in;
+		char array[CAPACITY];
+		char next;
+		in >> next;
+		int i = 0;
+
+			for (; i < CAPACITY; i++) {
+				if (next == ';') {
+				       	break;
+				}
+				
+				else {
+					array[i] = next;
+					in >> next;
+				}
+				
+			}	
+
+	array[i] = 0; 
+	obj = bigint(array); 
+	return in;
+}
+
+
 bool bigint::operator==(const bigint& obj) {
     for (int i = 0; i < CAPACITY; ++i) {
         if (numArray[i] != obj.numArray[i])
@@ -71,3 +91,18 @@ bool bigint::operator==(const bigint& obj) {
 	}
     return true; //Returns true if all elements are equal
 	}
+
+bigint bigint::operator+(bigint obj) const {
+	bigint result;
+	int carry = 0;
+	for (int i = 0; i < CAPACITY; i++) {
+		int sum = numArray[i] + obj.numArray[i] + carry;
+		result.numArray[i] = sum % 10;
+		carry = sum / 10;
+	}
+	return result;
+}
+int bigint::operator[](int i) const {
+	return numArray[i];
+}
+

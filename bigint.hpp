@@ -22,13 +22,13 @@ public:
 
 	void debugPrint(std::ostream&) const;
 
-	friend std::ostream& operator<<(std::ostream&, const bigint&);
+	friend std::ostream& operator<<(std::ostream&, const bigint& obj);
 
 	bool operator==(const bigint&);
 
-	friend std::istream& operator>>(std::istream&, bigint&);
+	friend std::istream& operator>>(std::istream&, bigint& obj);
 
-	bigint operator+(bigint) const;
+	bigint operator+(bigint obj) const;
 
 	bigint timesDigit(int) const;
 
