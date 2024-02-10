@@ -13,7 +13,7 @@ int main() {
 
     bigint bigint1;
     bigint bigint2;
-    std::cout << "HERE" << std::endl;
+    
     while (in >> bigint1 >> bigint2) {
         std::cout << bigint1 << "\n" << bigint2 << "\n";
 
