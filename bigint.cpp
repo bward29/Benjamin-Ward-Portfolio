@@ -8,9 +8,9 @@
 #include <iostream>
 #include <cassert>
 
-bigint::bigint() {
+bigint::bigint() { //Initializes numArray to all zeros
     for (int i = 0; i < CAPACITY; ++i) {
-        numArray[i] = 0; //Initializes numArray to all zeros
+        numArray[i] = 0; 
     }
 }
 
