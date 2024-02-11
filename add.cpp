@@ -1,26 +1,42 @@
+/*
+* Benjamin Ward
+* add.cpp
+* CS23001
+* 02/19/24
+*/
 #include <iostream>
 #include <fstream>
-#include <cstdlib>
 #include "bigint.hpp"
 
 int main() {
-    std::ifstream in;
-    in.open("data1-1.txt");
+    std::ifstream in("data1-1.txt");
     if (!in) {
-        std::cerr << "File not found: data-1-1.txt" << std::endl;
-        exit(1);
+        std::cerr << "File not found: data1-1.txt" << std::endl;
+        return 0;
     }
 
-    bigint bigint1;
-    bigint bigint2;
-    
-    while (in >> bigint1 >> bigint2) {
-        std::cout << bigint1 << "\n" << bigint2 << "\n";
+    bigint bigint1, bigint2, sum;
 
-        bigint sum = bigint1 + bigint2;
-        std::cout << "sum: " << sum << "\n";
+    while (in >> bigint1) {
+		    in.ignore();
+
+		    if (! (in >> bigint2)) {
+			    std::cerr << "Unable to read bigint2" << std::endl;
+			    return 0;
+		    }
+
+		    std::cout << "bigint 1: " << bigint1 << "\n";
+		    std::cout << "bigint 2: " << bigint2 << "\n";
+
+		    sum = bigint1 + bigint2;
+
+		    std::cout << "Sum: " << sum << "\n\n";
+
+		    in.ignore();
     }
 
     in.close();
     return 0;
+
 }
+
