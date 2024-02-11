@@ -8,101 +8,122 @@
 #include <iostream>
 #include <cassert>
 
-bigint::bigint() { //Initializes numArray to all zeros
-    for (int i = 0; i < CAPACITY; ++i) {
-        numArray[i] = 0; 
+void bigint::initialize() {
+   
+       	for (int i = 0; i < CAPACITY; ++i) {
+        numArray[i] = 0; // numArray is an array of integers to store the digits of the large integers
     }
 }
 
-bigint::bigint(int numbers):bigint() { //Converts 'numbers' into a 'bigint'
-    int i = 0;
+bigint::bigint() {
+    initialize(); // initializes all elements of numArray to zero
+}
 
-    while (numbers > 0) {
+bigint::bigint(int numbers) { // constructor that converts an int into a bigint
+    initialize();
+   
+    int i = 0;
+    while (numbers > 0) { // extracts digits from int and stores them in the array
         numArray[i] = numbers % 10;
         numbers = numbers / 10;
         i++;
     }
 }
 
-bigint::bigint(const char characters[]):bigint() { //Converts each character to an int
-    int index = 0;
+bigint::bigint(const char characters[]) { // constructor to convert a character array into a bigint
+    initialize();
+    	
+    	int index = 0;
+	for (; characters[index] != '\0'; ++index) // finds the length of the char array
 
-    for (; characters[index] != '\0'; ++index);
-
-    for (int i = 0; i < index; ++i) {
-        numArray[i] = characters[index - 1 - i] - '0'; 
+    	for (int i = 0; i < index; ++i) { // converts char to int and stores them in reverse order
+        	numArray[i] = characters[index - 1 - i] - '0';
     }
 }
 
-void bigint::debugPrint(std::ostream& out) const {
-    for (int i = CAPACITY - 1; i >= 0; --i) {
-        out << numArray[i] << "|"; //Prints the content of numArray in reverse order seperated by "|"
+void bigint::debugPrint(std::ostream& out) const { // debug print function to display the contents of the bigint array
+    
+	for (int i = CAPACITY - 1; i >= 0; --i) {
+     		out << numArray[i] << "|"; // // prints the content of numArray in reverse order seperated by "|"
     }
+    
+
     out << std::endl;
 }
 
-std::ostream& operator<<(std::ostream& out, const bigint& obj) {
-    int i = CAPACITY - 1;
+std::ostream& operator<<(std::ostream& out, const bigint& obj) { // overloaded output stream operator to print the large int
+    
+	int i = CAPACITY - 1;
+	while (i >= 0 && obj.numArray[i] == 0)
+        --i;
 
-    while (i > 0 && obj.numArray[i] == 0) --i;
     int count = 0;
-
     for (; i >= 0; --i) {
-	 out << obj.numArray[i];
+    	out << obj.numArray[i];
 
-		if (++count % 80 == 0)
-		   out << std::endl; //Prints digits in reverse order and inserts a newline for every 80 characters
+       	 if (++count % 80 == 0) // inserts a newline after every 80 characters
+         	out << std::endl;
     }
 
-    if (count == 0) out << '0';
+    if (count == 0)
+    	out << '0';
+
     return out;
 }
 
-std::istream& operator>>(std::istream& in, bigint& obj) {
-	in >> obj.numArray[0];
-		return in;
-		char array[CAPACITY];
-		char next;
-		in >> next;
-		int i = 0;
+std::istream& operator>>(std::istream& in, bigint& obj) { // overloaded input stream to read the large int from input
+   
+    obj.initialize();
 
-			for (; i < CAPACITY; i++) {
-				if (next == ';') {
-				       	break;
-				}
-				
-				else {
-					array[i] = next;
-					in >> next;
-				}
-				
-			}	
+    char ch; // declares character variable ch and it is used to read characters from istream
+    int i = 0; // declares and initializes an integer variable i to zero
 
-	array[i] = 0; 
-	obj = bigint(array); 
-	return in;
+    while (in >> ch && ch != ';') { // reads characters from the istream until a semicolon is encountered
+
+        if (ch >= '0' && ch <= '9') {
+
+            for (int n = i; n > 0; --n) {
+                obj.numArray[n] = obj.numArray[n - 1];
+            }
+
+            obj.numArray[0] = ch - '0';
+            ++i;
+        }
+    }
+
+    return in; // returns the input stream in
 }
 
+bool bigint::operator==(const bigint& obj) const { // overloaded equality operator to compare two bigint objects
+   
+       	for (int i = 0; i < CAPACITY; ++i) {
+        
+	    if (numArray[i] != obj.numArray[i])
+            	return false; 
+    }
 
-bool bigint::operator==(const bigint& obj) {
+    return true;
+}
+
+bigint bigint::operator+(const bigint& obj) const { // overloaded addition operator to perform addition of two bigint objects
+    bigint result;
+    int carry = 0;
+
     for (int i = 0; i < CAPACITY; ++i) {
-        if (numArray[i] != obj.numArray[i])
-	   return false; //Returns false if any elements are not equal
-	}
-    return true; //Returns true if all elements are equal
-	}
+        int sum = numArray[i] + obj.numArray[i] + carry; 
+        result.numArray[i] = sum % 10;
+        carry = sum / 10; 
+    }
 
-bigint bigint::operator+(bigint obj) const {
-	bigint result;
-	int carry = 0;
-	for (int i = 0; i < CAPACITY; i++) {
-		int sum = numArray[i] + obj.numArray[i] + carry;
-		result.numArray[i] = sum % 10;
-		carry = sum / 10;
-	}
-	return result;
+    return result; // returns result, which contains the sum of two bigint objects
 }
-int bigint::operator[](int i) const {
-	return numArray[i];
+
+int bigint::operator[](int index) const { // overloaded subscript operator to access individual digits of the large int
+    
+	if (index < 0 || index >= CAPACITY) { // checks if the value of index is less than or equal to CAPACITY; if true, the function returns zero
+        return 0; 
+    }
+
+    return numArray[index];
 }
 
