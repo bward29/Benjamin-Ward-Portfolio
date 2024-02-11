@@ -1,7 +1,14 @@
 // bigint Test Program
 //
 // 
-//#include <iostream>
+//
+/* Benjamin Ward
+* test_add.cpp
+* CS23001
+* 02/12/24
+*/
+
+#include <iostream>
 #include <cassert>
 #include "bigint.hpp"
  
@@ -118,7 +125,6 @@ int main () {
     {
 
     }
-    std::cout << "Last test!" << std::endl;
     //-----------------------------------------------------
     // Setup fixture
     left = bigint(234);
