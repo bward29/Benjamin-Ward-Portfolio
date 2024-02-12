@@ -12,23 +12,23 @@ const int CAPACITY = 400;
 class bigint {
 public:
 
-	void initialize();
+	void initializeArray();
 
 	bigint();
 
 	bigint(int);
 
-	bigint(const char[]);
+	bigint(const char charArray[]);
 
 	void debugPrint(std::ostream&) const;
 
 	friend std::ostream& operator<<(std::ostream&, const bigint& obj);
 
-	bool operator==(const bigint&);
+	bool operator==(const bigint& obj) const;
 
 	friend std::istream& operator>>(std::istream&, bigint& obj);
 
-	bigint operator+(bigint obj) const;
+	bigint operator+(const bigint& obj) const;
 
 	bigint timesDigit(int) const;
 
@@ -43,4 +43,3 @@ private:
 	int numArray[CAPACITY];
 };
 #endif
-
