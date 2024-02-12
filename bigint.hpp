@@ -1,8 +1,8 @@
 /*
-* Benjamin Ward
-* bigint.hpp
-* CS23001
-* 02/12/24
+* NAME:  Benjamin Ward
+* FILE: bigint.hpp
+* COURSE: CS23001
+* DATE: 02/12/24
 */
 #ifndef bigint_HPP
 #define bigint_HPP
