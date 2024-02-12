@@ -8,7 +8,7 @@
 #include <iostream>
 #include <cassert>
 
-void bigint::initializeArray() { // Function to initialize the array elements to zero
+void bigint::initializeArray() { // function to initialize the array elements to zero
        	for (int i = 0; i < CAPACITY; ++i) {
         numArray[i] = 0; // numArray stores the digits of the large integers
     }
