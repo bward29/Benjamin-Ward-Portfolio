@@ -1,8 +1,8 @@
 /*
-* Benjamin Ward
-* add.cpp
-* CS23001
-* 02/19/24
+* NAME: Benjamin Ward
+* FILE: add.cpp
+* COURSE: CS23001
+* DATE: 02/19/24
 */
 #include <iostream>
 #include <fstream>
