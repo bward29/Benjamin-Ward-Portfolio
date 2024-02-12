@@ -43,7 +43,7 @@ bigint::bigint(const char charArray[]) { // constructor to convert a character a
 void bigint::debugPrint(std::ostream& out) const { // debug print function to display the contents of the bigint array
     
 	for (int i = CAPACITY - 1; i >= 0; --i) {
-     		out << numArray[i] << "|"; // // prints the content of numArray in reverse order seperated by "|"
+     		out << numArray[i] << "|"; // prints the content of numArray in reverse order seperated by "|"
     }
     
 
