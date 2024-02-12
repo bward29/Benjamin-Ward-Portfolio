@@ -8,19 +8,19 @@
 #include <iostream>
 #include <cassert>
 
-void bigint::initialize() {
+void bigint::initializeArray() { // sets all elements of numArray to zero
    
        	for (int i = 0; i < CAPACITY; ++i) {
         numArray[i] = 0; // numArray is an array of integers to store the digits of the large integers
     }
 }
 
-bigint::bigint() {
-    initialize(); // initializes all elements of numArray to zero
+bigint::bigint() { 
+    initializeArray(); // initializes all elements of numArray to zero
 }
 
 bigint::bigint(int numbers) { // constructor that converts an int into a bigint
-    initialize();
+    initializeArray();
    
     int i = 0;
     while (numbers > 0) { // extracts digits from int and stores them in the array
@@ -30,14 +30,14 @@ bigint::bigint(int numbers) { // constructor that converts an int into a bigint
     }
 }
 
-bigint::bigint(const char characters[]) { // constructor to convert a character array into a bigint
-    initialize();
+bigint::bigint(const char charArray[]) { // constructor to convert a character array into a bigint
+    initializeArray();
     	
-    	int index = 0;
-	for (; characters[index] != '\0'; ++index) // finds the length of the char array
+    	int arrayLength = 0;
+	for (; charArray[arrayLength] != '\0'; ++arrayLength) // finds the length of the char array
 
-    	for (int i = 0; i < index; ++i) { // converts char to int and stores them in reverse order
-        	numArray[i] = characters[index - 1 - i] - '0';
+    	for (int i = 0; i < arrayLength; ++i) { // converts char to int and stores them in reverse order
+        	numArray[i] = charArray[arrayLength - 1 - i] - '0';
     }
 }
 
@@ -73,7 +73,7 @@ std::ostream& operator<<(std::ostream& out, const bigint& obj) { // overloaded o
 
 std::istream& operator>>(std::istream& in, bigint& obj) { // overloaded input stream to read the large int from input
    
-    obj.initialize();
+    obj.initializeArray();
 
     char ch; // declares character variable ch and it is used to read characters from istream
     int i = 0; // declares and initializes an integer variable i to zero
@@ -86,7 +86,7 @@ std::istream& operator>>(std::istream& in, bigint& obj) { // overloaded input st
                 obj.numArray[n] = obj.numArray[n - 1];
             }
 
-            obj.numArray[0] = ch - '0';
+            obj.numArray[0] = ch - '0'; // converts the char to int, then stores at the beginning
             ++i;
         }
     }
@@ -111,8 +111,8 @@ bigint bigint::operator+(const bigint& obj) const { // overloaded addition opera
 
     for (int i = 0; i < CAPACITY; ++i) {
         int sum = numArray[i] + obj.numArray[i] + carry; 
-        result.numArray[i] = sum % 10;
-        carry = sum / 10; 
+        result.numArray[i] = sum % 10; // stores the single digit
+        carry = sum / 10; // calculates for the next digit
     }
 
     return result; // returns result, which contains the sum of two bigint objects
