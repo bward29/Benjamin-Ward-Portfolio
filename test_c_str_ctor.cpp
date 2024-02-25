@@ -31,7 +31,7 @@ int main () {
         bigint bi("1");
 
         // Verify
-        assert(bi == 1);
+        assert(bi == bigint("1"));
     }
 
     {
@@ -43,7 +43,7 @@ int main () {
         bigint bi("27");
 
         // Verify
-        assert(bi == 27);
+        assert(bi == bigint("27"));
     }
 
     {
@@ -55,7 +55,7 @@ int main () {
         bigint bi("456789");
 
         // Verify
-        assert(bi == 456789);
+        assert(bi == bigint("456789"));
     }
     
 
@@ -69,7 +69,7 @@ int main () {
         bigint bi("6234567890");
     
         // Verify
-        assert(bi == "6234567890");
+        assert(bi == bigint ("6234567890"));
         std::cout << "6234567890 == ";
         std::cout << bi;           
         std::cout << std::endl;
@@ -121,15 +121,15 @@ int main () {
 
 
         // Verify
-        assert(a == 0);
-        assert(b == 11);
-        assert(c == 222);
-        assert(d == 3333);
-        assert(e == 44444);
-        assert(f == 555555);
-        assert(g == 6666666);
-        assert(h == 77777777);
-        assert(i == 888888888);
+        assert(a == bigint ("0"));
+        assert(b == bigint ("11"));
+        assert(c == bigint ("222"));
+        assert(d == bigint ("3333"));
+        assert(e == bigint ("44444"));
+        assert(f == bigint ("555555"));
+        assert(g == bigint ("6666666"));
+        assert(h == bigint ("77777777"));
+        assert(i == bigint ("888888888"));
    }
 
 

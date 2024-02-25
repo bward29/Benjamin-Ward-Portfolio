@@ -9,7 +9,7 @@
 #include "bigint.hpp"
 
 //===========================================================================
-int main () {
+int main() {
     {
         //------------------------------------------------------
         // Setup fixture
@@ -19,12 +19,26 @@ int main () {
         bi = bi.timesDigit(1);
 
         // Verify
-        assert(bi == 12);  //Will FAIL, fix and add test cases.
+        assert(bi == 3 * 1);
     }
 
+    {
+        // Additional test cases
 
-    //Add test cases as needed.
-    
+        // Test case for timesDigit(0)
+        bigint bi2(7);
+        bi2 = bi2.timesDigit(0);
+        assert(bi2 == 0);
+
+        // Test case for timesDigit(5)
+        bigint bi3(4);
+        bi3 = bi3.timesDigit(5);
+        assert(bi3 == 4 * 5);
+
+        // Add more test cases as needed.
+    }
+
     std::cout << "Done testing bigint * digit" << std::endl;
     return 0;
 }
+

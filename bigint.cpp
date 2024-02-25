@@ -117,12 +117,53 @@ bigint bigint::operator+(const bigint& obj) const { // overloaded addition opera
     return result; // returns result, which contains the sum of two bigint objects
 }
 
+bigint bigint::timesDigit(int x) const {
+	bigint temp;
+	int rem = 0;
+	int result = 0;
+
+	for (int i = 0; i < CAPACITY; i++) { // multiply each digit in numArray by x
+		rem = numArray[i] * x + rem; // multiply digit by x and adds previous remainder
+		result = rem % 10; // calculate the current digit of the result
+		rem /= 10; // updates the remainder for the next iteration
+		temp.numArray[i] = result; // stores the result in temp
+	}
+
+	return temp;
+}
+
+bigint bigint::times10(int x) const {
+	bigint temp; // create a temporary bigint to store the result:wq
+
+
+	for (int i = CAPACITY -1 - x; i >= 0; i--) { // shifts digits in numArray to the left by x digits
+		temp.numArray[i + x] = numArray[i];
+	}
+
+	for (int j = 0; j < x; j++) { // fills the lower x positions with zeros
+		temp.numArray[j] = 0;
+	}
+
+	return temp; // returns final result
+}
+
+bigint bigint::operator*(bigint & obj) const {
+	bigint result = 0; // initializes the result to 0
+
+	for (int i = 0; i < CAPACITY; i++) { // performs multiplication digit by digit and accumulates results
+		
+		result = result + (timesDigit(obj.numArray[i])).times10(i); // multiplies current digit with obj's corresponding digit and shifts the result to the left by i positions
+	}
+
+	return result; // returns final result
+}
+
+
 int bigint::operator[](int index) const { // overloaded subscript operator to access individual digits of the big int
-    
+
 	if (index < 0 || index >= CAPACITY) { // checks if the value of index out of bounds;  if true, the function returns zero
-        return 0; 
+        return 0;
     }
 
     return numArray[index];
 }
-

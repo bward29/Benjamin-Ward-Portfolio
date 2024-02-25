@@ -30,11 +30,11 @@ public:
 
 	bigint operator+(const bigint& obj) const;
 
-	bigint timesDigit(int) const;
+	bigint timesDigit(int x) const;
 
-	bigint times10(int) const;
+	bigint times10(int x) const;
 
-	bigint operator*(bigint) const;
+	bigint operator*(bigint& obj) const;
 
 	int operator[](int) const;
 
