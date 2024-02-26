@@ -133,7 +133,7 @@ bigint bigint::timesDigit(int x) const {
 }
 
 bigint bigint::times10(int x) const {
-	bigint temp; // create a temporary bigint to store the result:wq
+	bigint temp; // create a temporary bigint to store the result
 
 
 	for (int i = CAPACITY -1 - x; i >= 0; i--) { // shifts digits in numArray to the left by x digits
